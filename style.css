@@ -1,0 +1,520 @@
+/* --- Global Styles & Fantasy Theme --- */
+:root {
+    --bg-color: #f4f0e8; /* Parchment */
+    --text-color: #4a3f35; /* Dark brown */
+    --primary-color: #8b4513; /* Saddle brown */
+    --secondary-color: #cd853f; /* Peru */
+    --accent-color: #d2691e; /* Chocolate */
+    --border-color: #a0522d; /* Sienna */
+    --lair-color: #dc143c; /* Crimson */
+    --highlight-bg: #fff8dc; /* Cornsilk */
+    --rune-glow: #ffd700; /* Gold */
+
+    --font-primary: 'Garamond', 'Times New Roman', serif;
+    --font-headings: 'Trajan Pro', 'Palatino Linotype', serif; /* Use a fantasy-like font if available */
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.app-container {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px 40px;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-headings);
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+/* --- Utility Classes --- */
+.hidden {
+    display: none !important;
+}
+
+.error-message {
+    color: var(--lair-color);
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.feedback-message {
+    color: var(--primary-color);
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* --- Buttons --- */
+.btn {
+    font-family: var(--font-headings);
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin: 5px;
+    font-size: 0.9em;
+}
+
+.btn:hover {
+    background-color: var(--accent-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    color: #666666;
+    border-color: #999999;
+}
+
+.btn-primary {
+    font-weight: bold;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+.btn-secondary:hover {
+    background-color: var(--accent-color);
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 0.8em;
+}
+
+.btn-execute {
+    background-color: #2e8b57; /* Sea Green */
+}
+.btn-execute:hover {
+    background-color: #3cb371; /* Medium Sea Green */
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+/* --- Forms --- */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: calc(100% - 22px); /* Adjust for padding and border */
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--highlight-bg);
+    color: var(--text-color);
+    font-family: var(--font-primary);
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* --- Onboarding --- */
+.onboarding-step {
+    border: 1px dashed var(--secondary-color);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: rgba(255, 248, 220, 0.3); /* Lighter cornsilk */
+}
+
+/* Chart World Specific */
+.chart-world-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.route-sources, .route-dest {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 5px;
+    min-height: 200px;
+    width: 50%;
+    background-color: var(--highlight-bg);
+}
+
+.route-sources h3, .route-dest h3 {
+    margin-top: 0;
+    border-bottom: 1px solid var(--secondary-color);
+    padding-bottom: 5px;
+}
+
+.draggable-route {
+    background-color: var(--bg-color);
+    border: 1px solid var(--secondary-color);
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    cursor: grab;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.draggable-route:active {
+    cursor: grabbing;
+}
+
+.charted-route {
+    background-color: #fffacd; /* lemon chiffon */
+    border: 1px solid var(--primary-color);
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.charted-route.lair {
+    border: 2px solid var(--lair-color);
+    box-shadow: 0 0 5px var(--lair-color);
+}
+
+.dragon-icon {
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-left: 10px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+.dragon-icon:hover {
+    opacity: 1;
+}
+.charted-route.lair .dragon-icon {
+    opacity: 1;
+    color: var(--lair-color);
+}
+
+.drop-active {
+    border-style: dashed;
+    border-color: var(--primary-color);
+    background-color: #e8e4d9;
+}
+
+/* Fellowship Specific */
+#suggested-allies {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--highlight-bg);
+    border: 1px dashed var(--secondary-color);
+    border-radius: 4px;
+}
+.ally-placeholder {
+    background-color: var(--bg-color);
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    opacity: 0.8;
+}
+#invited-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+#invited-list li {
+    background-color: var(--highlight-bg);
+    padding: 3px 8px;
+    margin-bottom: 4px;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+
+/* --- Guild Hall --- */
+.guild-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+#adventurer-profile {
+    font-size: 1.1em;
+}
+#adv-name {
+    font-weight: bold;
+}
+#adv-title {
+    font-style: italic;
+    color: var(--accent-color);
+}
+
+#renown-section {
+    text-align: right;
+}
+
+#xp-bar {
+    width: 150px;
+    height: 15px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+/* Style progress bar appearance */
+progress[value]::-webkit-progress-bar {
+  background-color: var(--highlight-bg);
+  border-radius: 5px;
+  border: 1px solid var(--secondary-color);
+}
+progress[value]::-webkit-progress-value {
+  background-color: var(--rune-glow);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+progress[value]::-moz-progress-bar {
+  background-color: var(--rune-glow);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+
+.guild-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.guild-section {
+    background-color: rgba(255, 248, 220, 0.3); /* Lighter cornsilk */
+    border: 1px solid var(--secondary-color);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.guild-actions .btn {
+    display: block;
+    width: calc(100% - 10px); /* Adjust for margin */
+    margin-bottom: 10px;
+}
+
+#world-map-display {
+    min-height: 100px; /* Placeholder */
+}
+.map-route {
+    background-color: var(--highlight-bg);
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 3px;
+    display: flex; align-items: center;
+}
+.map-route.lair {
+     border-color: var(--lair-color);
+     font-weight: bold;
+}
+.map-route span { margin-left: 8px;}
+
+#insight-runes-display ul {
+    list-style: none;
+    padding: 0;
+}
+#insight-runes-display li {
+     background-color: var(--highlight-bg);
+     border-left: 5px solid var(--rune-glow);
+     padding: 8px;
+     margin-bottom: 8px;
+     border-radius: 0 4px 4px 0;
+}
+#insight-runes-display li small {
+    display: block;
+    color: #777;
+    margin-top: 4px;
+}
+
+
+/* --- Library --- */
+#library-container header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.scrolls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.skill-scroll {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 15px;
+    background-color: var(--highlight-bg);
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.skill-scroll:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.skill-scroll h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+.skill-scroll p {
+    font-size: 0.9em;
+    min-height: 40px; /* Ensure consistent height */
+}
+.skill-scroll .btn {
+    margin-top: 10px;
+}
+.skill-scroll.learned {
+    opacity: 0.6;
+    border-style: dashed;
+}
+.skill-scroll.learned .btn {
+    background-color: #aaa;
+    cursor: default;
+}
+
+
+/* --- Modals (Tutelage & Proving Ground) --- */
+.modal {
+    position: fixed; /* Changed from 'absolute' for better centering */
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.6); /* Dim background */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--bg-color);
+    margin: auto;
+    padding: 30px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    position: relative; /* Needed for close button positioning */
+}
+
+/* Tutelage Specific */
+.rune-btn {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    transition: transform 0.1s ease, text-shadow 0.2s ease;
+}
+.rune-btn:active {
+    transform: scale(0.95);
+}
+.rune-btn.glow {
+    text-shadow: 0 0 15px var(--rune-glow);
+    animation: pulse 1s infinite alternate;
+}
+@keyframes pulse {
+    from { text-shadow: 0 0 5px var(--rune-glow); }
+    to { text-shadow: 0 0 20px var(--rune-glow); }
+}
+
+/* Proving Ground Specific */
+.skill-ui {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px dashed var(--secondary-color);
+    border-radius: 5px;
+    background-color: rgba(255, 248, 220, 0.3);
+}
+.skill-ui textarea, .skill-ui input {
+    display: block;
+    width: calc(100% - 22px);
+    margin-bottom: 10px;
+}
+
+.results-area {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    background-color: var(--highlight-bg);
+}
+.results-area h4 {
+    margin-top: 0;
+    color: var(--accent-color);
+}
+
+#results-reasoning {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--secondary-color);
+    background-color: #f0f0f0; /* slightly different bg */
+    padding: 10px;
+    border-radius: 4px;
+}
+#results-reasoning h5 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #555;
+}
+#results-reasoning p {
+    font-style: italic;
+    color: #333;
+    font-size: 0.95em;
+}
+
+#results-choices {
+     margin-top: 15px;
+     padding-top: 10px;
+     border-top: 1px dashed var(--secondary-color);
+}
+#results-choices h5 { margin-bottom: 10px; }
+.btn-choice {
+    background-color: var(--secondary-color);
+}
