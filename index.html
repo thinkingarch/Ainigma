@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventurer's Chronicle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+
+        <div id="onboarding-container" class="main-section">
+            <div id="onboarding-step-1" class="onboarding-step">
+                <h1>Your Legend Begins...</h1>
+                <p>Embark on a journey to master the Arcane Arts of AI and chart your career path!</p>
+                <button id="begin-quest-btn" class="btn btn-primary">Begin Your Quest</button>
+            </div>
+
+            <div id="onboarding-step-2" class="onboarding-step hidden">
+                <h2>Link Your Lineage (Optional)</h2>
+                <p>Connect your LinkedIn profile to swiftly establish your starting Class (Role) and Realm (Industry).</p>
+                <button id="link-linkedin-btn" class="btn"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" style="height: 1em; vertical-align: middle; margin-right: 5px;"> Link Professional Lineage</button>
+                <button id="skip-linkedin-btn" class="btn btn-secondary">Scribe Your Own Story (Manual Entry)</button>
+            </div>
+
+            <div id="onboarding-step-3" class="onboarding-step hidden">
+                <h2>Scribe Your Story</h2>
+                <form id="story-form">
+                    <div class="form-group">
+                        <label for="adv-class">Your Current Class (Role):</label>
+                        <input type="text" id="adv-class" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adv-realm">Your Current Realm (Industry):</label>
+                        <input type="text" id="adv-realm" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Confirm Your Path</button>
+                </form>
+            </div>
+
+            <div id="onboarding-step-4" class="onboarding-step hidden">
+                <h2>Chart Your Known World</h2>
+                <p>Define 3-5 Core Expedition Routes (Key Job Tasks). Mark 1-2 as Dragon's Lairs (Pain Points).</p>
+                <div class="chart-world-container">
+                    <div class="route-sources">
+                        <h3>Available Expedition Routes</h3>
+                        <input type="text" id="new-route-input" placeholder="Add New Route...">
+                        <button id="add-route-btn" class="btn btn-sm">Add</button>
+                        <div id="available-routes">
+                            </div>
+                    </div>
+                    <div id="charted-routes-dropzone" class="route-dest">
+                        <h3>Your Charted Routes (Drag Here - Max 5)</h3>
+                        </div>
+                </div>
+                 <div id="route-error" class="error-message hidden"></div>
+                <button id="map-world-btn" class="btn btn-primary" disabled>Map Your World</button>
+            </div>
+
+             <div id="onboarding-step-6" class="onboarding-step hidden">
+                <h2>Assemble Your Fellowship</h2>
+                <p>Invite fellow adventurers (colleagues) to join the quest. Successful recruitment grants initial Renown!</p>
+                <div id="suggested-allies" class="hidden">
+                    <h4>Suggested Allies (from Lineage)</h4>
+                    <div class="ally-placeholder">👤 Ally Placeholder 1</div>
+                    <div class="ally-placeholder">👤 Ally Placeholder 2</div>
+                </div>
+                <div class="form-group">
+                     <label for="invite-email">Invite by Scroll (Email):</label>
+                     <input type="email" id="invite-email" placeholder="adventurer@domain.com">
+                     <button id="invite-btn" class="btn btn-sm">Invite</button>
+                </div>
+                <div id="invite-feedback" class="feedback-message"></div>
+                <ul id="invited-list"></ul>
+                <button id="finish-onboarding-btn" class="btn btn-primary">Forge Your Legend (Finish)</button>
+            </div>
+        </div>
+
+        <div id="guild-hall-container" class="main-section hidden">
+            <header class="guild-header">
+                <div id="adventurer-profile">
+                    <span id="adv-name">Adventurer: [Name]</span> |
+                    <span id="adv-title">Title: Novice Explorer</span>
+                </div>
+                <div id="renown-section">
+                    Renown (XP): <span id="adv-xp">0</span> / <span id="xp-next-level">100</span>
+                    <progress id="xp-bar" value="0" max="100"></progress>
+                </div>
+            </header>
+            <div class="guild-body">
+                <div class="guild-section">
+                    <h3>World Map</h3>
+                    <div id="world-map-display">
+                        <p>Your charted routes and lairs will appear here.</p>
+                    </div>
+                </div>
+                <div class="guild-section">
+                    <h3>Quest Log</h3>
+                    <div id="quest-log-display">
+                        <p>Seek guidance from the Oracle or visit the Library.</p>
+                        </div>
+                </div>
+                <div class="guild-section guild-actions">
+                     <h3>Actions</h3>
+                     <button id="go-to-library-btn" class="btn">Visit the Arcane Library</button>
+                     <button id="view-insights-btn" class="btn">View Insight Runes</button>
+                     </div>
+                 <div id="insight-runes-display" class="guild-section hidden">
+                     <h3>Collected Insight Runes</h3>
+                     <ul id="insight-list"></ul>
+                     <button id="hide-insights-btn" class="btn btn-secondary">Hide Runes</button>
+                </div>
+            </div>
+        </div>
+
+         <div id="library-container" class="main-section hidden">
+             <header>
+                 <h2>The Arcane Library</h2>
+                 <button id="back-to-guild-btn-library" class="btn btn-secondary">Back to Guild Hall</button>
+             </header>
+             <p>Discover powerful Arcane Arts to aid your quests.</p>
+             <div id="scrolls-available" class="scrolls-grid">
+                 </div>
+         </div>
+
+         <div id="tutelage-container" class="modal hidden">
+            <div class="modal-content">
+                 <button class="close-btn" id="close-tutelage-btn">&times;</button>
+                 <h3 id="tutelage-title">Studying Scroll...</h3>
+                 <div id="tutelage-content">
+                     <p>This scroll teaches the basics of <strong id="tutelage-skill-name">Arcane Art</strong>.</p>
+                     <p>Practice: Click the rune when it glows!</p>
+                     <button id="tutelage-challenge-btn" class="btn rune-btn">✨</button>
+                     <p id="tutelage-feedback" class="feedback-message"></p>
+                 </div>
+                 <button id="complete-tutelage-btn" class="btn btn-primary" disabled>Complete Tutelage</button>
+            </div>
+        </div>
+
+         <div id="proving-ground-container" class="modal hidden">
+             <div class="modal-content">
+                 <button class="close-btn" id="close-proving-ground-btn">&times;</button>
+                 <h3 id="proving-ground-title">Proving Ground: Apply Arcane Art</h3>
+                 <p>Apply <strong id="proving-ground-skill-name">Arcane Art</strong> to a challenge.</p>
+
+                 <div id="apply-summarization-ui" class="skill-ui hidden">
+                     <label for="summarization-input">Paste Your Runes (Text) Here:</label>
+                     <textarea id="summarization-input" rows="6"></textarea>
+                     <button id="apply-summarization-btn" class="btn btn-execute">Summarize</button>
+                 </div>
+
+                  <div id="apply-foresight-ui" class="skill-ui hidden">
+                     <label for="foresight-input">Topic for Foresight:</label>
+                     <input type="text" id="foresight-input" placeholder="e.g., Future of Market X">
+                     <button id="apply-foresight-btn" class="btn btn-execute">Seek Foresight</button>
+                 </div>
+
+                 <div id="proving-ground-results" class="results-area hidden">
+                     <h4>The Magic Reveals...</h4>
+                     <div id="results-output"></div>
+                     <div id="results-reasoning" class="hidden">
+                         <h5>Whispers of the Magic (Reasoning):</h5>
+                         <p id="reasoning-text"></p>
+                     </div>
+                     <div id="results-choices" class="hidden">
+                          <h5>Choose the Path Forward:</h5>
+                          <button class="btn btn-choice" data-choice="A">Path A</button>
+                          <button class="btn btn-choice" data-choice="B">Path B</button>
+                     </div>
+                     <button id="save-insight-btn" class="btn btn-secondary">Save as Insight Rune</button>
+                     <div id="insight-feedback" class="feedback-message"></div>
+                 </div>
+             </div>
+         </div>
+
+    </div><script src="script.js"></script>
+</body>
+</html>
